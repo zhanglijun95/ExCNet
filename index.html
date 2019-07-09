@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>DeepPS</title>
+<title>ExCNet</title>
 
 <style>
 <!--
@@ -21,7 +21,7 @@ table.TableGrid
 </style>
 <meta http-equiv="Content-Language" content="zh-cn">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>DeepPS</title>
+<title>ExCNet</title>
 
 <style>
 <!--
@@ -49,13 +49,12 @@ table.TableGrid
 		<td valign="top" style="width: 1211px; height: 31px; padding: .75pt" align="left">
 		<p class="text">
 		<span lang="en-us"><b><font face="Calibri" size="5" color="#0000FF">
-		Towards Automatic
-		Image Exposure Level Assessment</font></b></span><p class="text">
+		Zero-Shot Restoration of Back-lit Images Using Deep Internal Learning</font></b></span><p class="text">
 		<font face="Calibri" size="4" color="#0000FF">
 		<span lang="en-us">
 		Lin Zhang,&nbsp;Lijun Zhang, 
-		Xiao Liu, Ying Shen, 
-		and Shengjie Zhao</span></font><p class="text">
+		Ying Shen, Shengjie Zhao
+		and Shaoming Zhang</span></font><p class="text">
 		<span lang="en-us"><font face="Calibri" size="4" color="#0000FF">School 
 		of Software Engineering, Tongji University, Shanghai 201804, China</font></span></td>
 	</tr>
@@ -64,76 +63,27 @@ table.TableGrid
 <p><span lang="en-us"><b><font face="Calibri" size="5">Introduction</font></b></span></p>
 <p>
 <span style="font-size: 13pt; font-family: Calibri; color: windowtext" lang="EN-US">
-This is the website of our paper &quot;Towards Automatic Image Exposure Level 
-Assessment&quot;, submitted to IEEE Transactions on Image Processing for review</span><span style="font-family: Calibri; font-size: 13pt" lang="en-us">.</span></p>
+This is the website of our paper &quot;Zero-Shot Restoration of Back-lit Images Using Deep Internal Learning&quot;, published in ACM Multimedia 2019</span><span style="font-family: Calibri; font-size: 13pt" lang="en-us">.</span></p>
 <p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">The quality of 
-acquired images can be surely reduced by improper exposures. Thus, in many 
-vision-related industries, such as imaging sensor manufacturing and video 
-surveillance, a method that can objectively and automatically assess exposure 
-levels of images is highly desired. Taking an image as input, such a method is 
-expected to output a scalar value, which can represent the overall perceptual 
-exposure level of the examined image, ranging from extremely underexposed to 
-extremely overexposed. However, studies focusing on image exposure level 
-assessment (IELA) are quite sporadic. It should be noted that blind NR-IQA 
-(No-Reference Image Quality Assessment) algorithms or metrics used to measure 
-the quality of contrast-distorted images cannot be used for IELA. The root 
-reason is that though these algorithms can quantify quality distortion of 
-images, they do not know whether the distortion is due to underexposure or 
-overexposure. In this paper, we attempt to solve the issue of IELA to some 
-extent and our contributions are twofold. Firstly, in order to facilitate the 
-study of IELA, an Image Exposure Database IEpsD) is established. In this 
-database, there are 24,500 images with various exposure levels, and for each 
-image there is an associated subjective exposure score which could reflect its 
-perceptual exposure level. Secondly, as IELA can be naturally formulated as a 
-regression problem, we thoroughly evaluate the performance of modern deep CNN 
-architectures for solving this specific task. Our evaluation results can serve 
-as a baseline when the other researchers develop even more sophisticated IELA 
-approaches. To make our results fully reproducible, the dataset and the relevant 
-source code have been made publicly available on this website.</font></span></p>
+<span lang="en-us"><font face="Calibri" style="font-size: 13pt">How to restore back-lit images still remains a challenging task. State-of-the-art methods in this field are based on supervised learning and thus they are usually restricted to specific training data. In this paper, we propose a ``zero-shot'' scheme for back-lit image restoration, which exploits the power of deep learning, but does not rely on any prior image examples or prior training. Specifically, we train a small image-specific CNN, namely ExCNet (short for Exposure Correction Network) at test time, to estimate the ``S-curve'' that best fits the test back-lit image. Once the S-curve is estimated, the test image can be then restored straightforwardly. ExCNet can adapt itself to different settings per image. This makes our approach widely applicable to different shooting scenes and kinds of back-lighting conditions. Statistical studies performed on 1512 real back-lit images demonstrate that our approach can outperform the competitors by a large margin. To the best of our knowledge, our scheme is the first unsupervised CNN-based back-lit image restoration method. To make the results reproducible, the source code is available on this website.</font></span></p>
 <hr>
-<p><span lang="en-us"><b><font face="Calibri" size="5">IEpsD (Image Exposure 
-Database)</font></b></span></p>
+<p><span lang="en-us"><b><font face="Calibri" size="5">Source Code</font></b></span></p>
 <p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">
-<a href="https://pan.baidu.com/s/1-SXyfO5nFHEL7gir4AhhbQ">real.zip</a>, 
-<a href="https://pan.baidu.com/s/1eEnxh6tmJIas0S9TgjuhuA">synthetic.zip</a></font></span></p>
+<span lang="en-us"><font face="Calibri" style="font-size: 13pt"> 
+<a href="test.txt">ExCNet.ipynb</a></font></span></p>
 <p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">IEpsD has two 
-parts, &quot;real data&quot; and &quot;synthetic data&quot;. &quot;real.zip&quot; comprises 3,500 real-world 
-images while &quot;synthetic.zip&quot; includes 21,000 synthetic images generated using 
-our exposure simulation algorithm. Each image in IEpsD has an associated 
-subjective score, reflecting its perceptual exposure level. In our experiments, 
-IEpsD's synthetic images are used for training IELA models, while its real-world 
-images are used for testing. </font></span></p>
-<hr>
-<p><span lang="en-us"><b><font face="Calibri" size="5">Source Codes</font></b></span></p>
-<p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">1. 
-<a href="https://pan.baidu.com/s/1D8AhHMc04fQSChA-DCQ8Pw">SynImgswithExpLevels.zip</a></font></span></p>
-<p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">The code can 
-synthesize images with various exposure levels from properly exposed source 
-images.</font></span></p>
-<p>
-<img border="0" src="syntheticsample.png" width="1477" height="638"></p>
-<p>
-<font style="font-size: 13pt" face="Calibri">Sample synthetic images. Images in 
-the first column are the source images. Images in columns 2~4 are synthetic 
-overexposed images while images in columns 5~7 are synthetic underexposed ones.</font></p>
+<span lang="en-us"><font face="Calibri" style="font-size: 13pt">This is the code of ExCNet, including the network model and the back-lit images restoration processing. The prerequisites for running the .ipynb file is the Tensorflow environment and Jupyter Notebook. </font></span></p>
+
 <p>
 <span lang="en-us"><font face="Calibri" style="font-size: 13pt"> 2.
-<a href="https://pan.baidu.com/s/1qrBYt4pyGeZ-EWX-ZLuoRw">IEMx.zip</a></font></span></p>
+<a href="">BacklitImages.zip</a></font></span></p>
 <p>
-<span lang="en-us"><font face="Calibri" style="font-size: 13pt">This is the code 
-of IEMx including training on real images and testing on synthetic images. 
-Testing results of different neural network structures are in corresponding .txt 
-files. The prerequisites for running the .ipynb file is the Tensorflow+Keras 
-environment and Jupyter Notebook. </font></span></p>
+<span lang="en-us"><font face="Calibri" style="font-size: 13pt">These is some back-lit images for testing.</font></span></p>
+
 <hr>
-<p align="justify"><font face="Calibri"><span lang="en-us">Created on: Apr. 16, 
+<p align="justify"><font face="Calibri"><span lang="en-us">Created on: Jul. 9, 
 2019</span></font></p>
-<p align="justify"><font face="Calibri">Last update: Apr<span lang="en-us">. 16,
+<p align="justify"><font face="Calibri">Last update: Jul<span lang="en-us">. 9,
 </span>201<span lang="en-us">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></p>
 </body>
 </html>
